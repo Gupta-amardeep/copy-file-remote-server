@@ -22,6 +22,7 @@ jobs:
       run: |
         gcloud compute instances create ${GITHUB_REF##*/} --zone=$GKE_ZONE
         gcloud compute ssh $GKE_USER@${GITHUB_REF##*/} --zone=$GKE_ZONE
+        sudo apt-get update && sudo apt-get install apache2 -y
 
     # - name: ssh ro new server
     #   uses: fifsky/ssh-action@master
