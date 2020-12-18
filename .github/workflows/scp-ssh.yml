@@ -1,0 +1,30 @@
+
+name: deploy vm to GCP via github-actions
+
+on: [push]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_ZONE: us-east1-d 
+
+jobs:
+  connect-GCP-download-sdk-provision-vm:
+    runs-on: centos-latest
+    steps:
+    - name: download-google-sdk
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+
+    - name: create machine
+      run: |
+        gcloud compute instances create ${GITHUB_REF##*/} --zone=$GKE_ZONE
+    - name: ls -a via ssh
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          yum install httpd -y
+          /usr/sbin/httpd
+        host: ${GITHUB_REF##*/}
+        user: root
