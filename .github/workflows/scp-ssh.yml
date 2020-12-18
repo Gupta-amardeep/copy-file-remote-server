@@ -6,7 +6,7 @@ on: [push]
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_ZONE: us-east1-d 
-  GKE_USER: student-04-38e00c39c596@qwiklabs.net
+  GKE_USER: student-04-38e00c39c596
 
 jobs:
   connect-GCP-download-sdk-provision-vm:
