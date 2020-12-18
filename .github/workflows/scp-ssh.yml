@@ -10,7 +10,7 @@ env:
 
 jobs:
   connect-GCP-download-sdk-provision-vm:
-    runs-on: centos-latest
+    runs-on: Centos-latest
     steps:
     - name: download-google-sdk
       uses: google-github-actions/setup-gcloud@v0.2.0
